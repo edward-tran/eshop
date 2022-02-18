@@ -4,32 +4,31 @@
     Giỏ hàng
 @endsection
 @section('content')
-@include('sweetalert::alert')
-    <h4 style="margin-left:260px; margin-top:10px; color:white">
-        <a href="/" style="color: white;">Trang chủ </a>
-        <i class="fas fa-chevron-right fa-sm" style="margin-left:10px; margin-right:10px;"></i> 
-        <a href="{{ url('cart') }}" style="color: white;">Cart</a> 
+    <h4 id="cart-navbar-sub">
+        <a href="/">Trang chủ</a>
+        <i class="fas fa-chevron-right fa-sm"></i> 
+        <a href="{{ url('cart') }}">Cart</a> 
     </h4>
-    <div class="wrapper" style="height: auto; padding:15px;">
+    <div class="wrapper" id="cart-detail">
         <table class="table">
         @php $total = 0;@endphp
         @foreach ($cartItems as $cartItem)
-            <tr style="margin-top:50px;" class="product-data">
-                <td style="text-align:center; width:100px;">
-                    <img src="{{ asset('assets/uploads/products/'.$cartItem->products->image ) }}" width="80px"; height="80px;">
+            <tr class="product-data">
+                <td>
+                    <img class="product-image" src="{{ asset('assets/uploads/products/'.$cartItem->products->image ) }}">
                 </td>
-                <td class="w-75" ><h5 style="margin-top:25px;">{{ $cartItem->products->name }}</h5></td>
+                <td class="w-75" ><h5>{{ $cartItem->products->name }}</h5></td>
                 <td class="w-25">
-                  <div style="font-weight:bold;"><label for="">Giá sản phẩm</label></div>
-                  <div style="margin-top: 8px; color:red; font-weight:bold; font-size:20px;">
+                  <div id="cart-price-label"><label for="">Giá sản phẩm</label></div>
+                  <div class="selling-price">
                     {{ $cartItem->products->selling_price }}&#8363
                   </div>
                 </td>
                 <td class="w-25">
                     <div class="quantity">
                         <input type="hidden" value="{{ $cartItem->product_id }}" class="product_id" >
-                        <label for="" style="margin-left:25px; "><b>Số lượng</b></label>
-                        <div class="input-group text-center" style="margin-bottom:10px; width:120px;">
+                        <label id="cart-quantity-label" for="">Số lượng</label>
+                        <div class="input-group text-center quantity-button">
                             <button class="input-group-text  decrement-btn">-</button>
                             <input type="text" class="form-control text-center qty-input" name="quantity"  value="{{ $cartItem->product_qty }}" >
                             <button class="input-group-text  increment-btn">+</button>
@@ -37,26 +36,29 @@
                     </div>
                 </td>
                 <td class="w-25">
-                  <button class="changeQuantity btn btn-primary" style="width:120px; margin-top:20px; border-radius:30px;"><i class="fas fa-upload" style="margin-right:5px;"></i>Cập nhật</button>
+                  <button class="changeQuantity btn btn-primary"><i class="fas fa-upload"></i>Cập nhật</button>
                 </td>
-                <td class="w-25" style="text-align: center;">
-                  <button style="width:80px; margin-top:20px; margin-right:10px; border-radius:30px;" type="button" class="btn btn-danger delete-cart-item"><i class="fas fa-trash-alt" style="margin-right:5px;"></i>Xóa</button>
+                <td class="w-25">
+                  <button type="button" class="btn btn-danger delete-cart-item"><i class="fas fa-trash-alt"></i>Xóa</button>
                 </td>
             </tr>
             @php $total += $cartItem->products->selling_price * $cartItem->product_qty; @endphp
         @endforeach
         </table>
-        <div style="display: inline-block;" class="col-md-12">
-          <div style="float:left; text-align:center; font-weight:bold; padding-left:110px;" class="col-md-9">
+        <div id="cart-total" class="col-md-12">
+          <div id="cart-total-money" class="col-md-9">
             <div>
               <label for="">Tổng tiền</label>
             </div>
             <div>
-              <span style="color: red;">{{$total}}&#8363</span>
+              <span class="selling-price">{{$total}}&#8363</span>
             </div>
           </div>
-          <div style="float:right; padding-top:10px;" class="col-md-3">
-            <button class="btn btn-success" style="border-radius:30px; width:150px; height:45px;"><img src="{{ asset('assets/img/checkout.png') }}" style="margin-right:5px;" width="30px;" height="30px;" >Thanh toán</button>
+          <div id="cart-checkout-button" class="col-md-3">
+            <a href="{{ url('checkout') }}" class="btn btn-success" id="checkout">
+              <img id="checkout-img" src="{{ asset('assets/img/checkout.png') }}" alt="checkout image">
+              Mua hàng
+            </a>
           </div>
         </div>
     </div>

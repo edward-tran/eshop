@@ -17,6 +17,10 @@
     <link href="{{ asset('frontend/css/owl.carousel.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/css/owl.theme.default.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/css/product_detail.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/css/cart.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/css/checkout.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/css/user-detail.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Bentham|Playfair+Display|Raleway:400,500|Suranna|Trocchi" rel="stylesheet">
     <style>
         a{

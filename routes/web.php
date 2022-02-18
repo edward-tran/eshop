@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Homepage\CartController;
+use App\Http\Controllers\HomePage\CheckoutController;
 use App\Http\Controllers\HomePage\HomePageController;
 
 /*
@@ -37,6 +38,7 @@ Route::get('user-detail', [HomePageController::class, 'showUserDetail']);
 
 Route::middleware(['auth'])->group(function(){
     Route::get('cart', [CartController::class, 'showCart']);
+    Route::get('checkout', [CheckoutController::class, 'index']);
 });
 
 

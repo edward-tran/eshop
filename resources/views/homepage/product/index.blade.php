@@ -5,10 +5,12 @@
 @endsection
 
 @section('content')
-<h4 style="color:white; margin-top:10px; margin-left:120px;">
-<a href="/" style="color:white;"> Trang chủ </a>
-<i class="fas fa-chevron-right fa-sm" style="margin-left:10px; margin-right:10px;"></i> 
-{{ $category->name }}</h4>
+    <h4 id="navbar-sub">
+        <a href="/">Trang chủ</a>
+        <i class="fas fa-chevron-right fa-sm"></i> 
+        {{ $category->name }}
+    </h4>
+
     <div class="py-5">
         <div class="container">
             <div class="row">

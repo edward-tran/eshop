@@ -1,0 +1,32 @@
+#user-detail{
+    height:fit-content; 
+    width:50%; 
+    padding:15px;
+}
+
+#user-detail h4{
+    text-align: center;
+}
+
+#user-detail img{
+    margin-right:5px; 
+    width:30px;
+    height:30px;
+}
+
+#user-detail-form{
+    padding:20px;
+}
+
+.user-detail-label{
+    float: left; 
+    font-weight:bold;
+}
+
+.user-detail-input{
+    float: right; 
+    border-radius:20px; 
+    border-style:solid; 
+    border-color:gray; 
+    padding-left:10px;
+}
