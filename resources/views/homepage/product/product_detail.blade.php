@@ -39,10 +39,17 @@
           </div>
         </div>
         <div style="float:right">
+          @if ( $product->quantity > 0 )
           <button type="button" class="btn btn-success addToCartBtn">
             <i class="fas fa-cart-plus"></i>
             Thêm vào giỏ hàng
           </button>
+        @else 
+          <button type="button" class="btn btn-success addToWishList">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+            Mua vào lần tới
+          </button>
+        @endif
         </div>
       </div>
     </div>

@@ -101,6 +101,12 @@
     border-radius: 30px;
   }
 
+  .addToWishList{
+    margin-right:30px;
+    margin-top: 25px;
+    border-radius: 30px;
+  }
+
   .quantity{
     margin-bottom: 20px;
   }
@@ -148,7 +154,11 @@
   .fa-cart-plus{
     margin-right:5px;
   }
-  
+  .fa-heart{
+    margin-right:5px;
+    color: red;
+  }
+
   @-webkit-keyframes my {
     0% { color: #F8CD0A; } 
     50% { color: #fff;  } 

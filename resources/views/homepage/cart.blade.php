@@ -27,12 +27,26 @@
                 <td class="w-25">
                     <div class="quantity">
                         <input type="hidden" value="{{ $cartItem->product_id }}" class="product_id" >
+                        @if ( $cartItem->products->quantity >= $cartItem->product_qty )
                         <label id="cart-quantity-label" for="">Số lượng</label>
                         <div class="input-group text-center quantity-button">
+                          <button class="input-group-text  decrement-btn">-</button>
+                          <input type="text" class="form-control text-center qty-input" name="quantity"  value="{{ $cartItem->product_qty }}" >
+                          <button class="input-group-text  increment-btn">+</button>
+                        </div>
+                        @elseif ( $cartItem->products->quantity == 0)
+                        <div id="out-of-stock">
+                          Hết hàng! &#128532
+                        </div>
+                        @else
+                        <div id="not-enough">Không đủ số lượng trong kho! &#128551
+                          <div class="input-group text-center quantity-button">
                             <button class="input-group-text  decrement-btn">-</button>
                             <input type="text" class="form-control text-center qty-input" name="quantity"  value="{{ $cartItem->product_qty }}" >
-                            <button class="input-group-text  increment-btn">+</button>
+                            <button class="input-group-text">+</button>
+                          </div>
                         </div>
+                        @endif
                     </div>
                 </td>
                 <td class="w-25">

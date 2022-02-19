@@ -27,7 +27,6 @@ h5{
 }
 
 #cart-price-label{
-    margin-top: 8px;
     font-weight:normal;
     font-size: 15px;
 }
@@ -42,7 +41,7 @@ h5{
 
 .changeQuantity{
     width:120px; 
-    margin-top:30px; 
+    margin-top:25px; 
     border-radius:30px;
 }
 
@@ -52,13 +51,13 @@ i{
 
 .delete-cart-item{
     width:80px; 
-    margin-top:30px; 
+    margin-top:25px; 
     margin-right:10px; 
     border-radius:30px;
 }
 
 #cart-quantity-label{
-    margin-left:2px;
+    margin-left:30px;
     font-weight: normal;
     font-size: 15px;
 }
@@ -91,4 +90,17 @@ i{
 
 #cart-checkout-button{
     float:right; padding-top:10px;
+}
+
+#out-of-stock{
+    text-align:center; 
+    margin-top:30px; 
+    color:red; 
+    font-weight:bold;
+}
+
+#not-enough{
+    text-align: center; 
+    color:red; 
+    font-weight:bold;
 }
