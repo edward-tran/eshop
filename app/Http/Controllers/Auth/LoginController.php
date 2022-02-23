@@ -47,7 +47,7 @@ class LoginController extends Controller
         }
         elseif(Auth::user()->role_as == '0') // Normal or Default User Login
         {
-            return redirect('/')->with('status','Chào mừng bạn quay trở lại!');
+            return redirect('/')->with('message','Chào mừng '.Auth::user()->name.' quay trở lại!');
         }
     }
 }

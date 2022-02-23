@@ -1,7 +1,10 @@
 @extends('layouts.admin')
+@section('title')
+Add New Product
+@endsection
 @section('content')
-    <div class="card">
-        <div class="card-header">
+    <div class="card" style="margin: 20px 20px; border-radius:20px;">
+        <div class="card-header" style="border-top-left-radius:20px; border-top-right-radius: 20px;" >
             <h4>Add Product</h4>
         </div>
         <div class="card-body">

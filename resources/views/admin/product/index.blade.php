@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title')
+Products
+@endsection
 @section('content')
     @if (\Session::has('message'))
         <div class="alert alert-success">
@@ -7,8 +10,8 @@
             </ul>
         </div>
     @endif
-    <div class="card">
-        <div class="card-header">
+    <div class="card" style="margin: 20px 20px; border-radius:20px;">
+        <div class="card-header" style="border-top-left-radius:20px; border-top-right-radius: 20px;">
             <h3>Product List</h3>
         </div>
         <div class="card-body">

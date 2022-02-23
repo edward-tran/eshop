@@ -34,8 +34,14 @@
       @else
       <li class="nav-item">
         <a style="color:#fdf2f3;" class="nav-link" href="{{ url('cart') }}">
-        <i class="fas fa-shopping-cart"></i>
+        <i class="fas fa-shopping-cart" ></i>
         Giỏ hàng ({{ DB::table('carts')->where('user_id', Auth::id())->count();}})
+      </a>
+      </li>
+      <li class="nav-item">
+        <a style="color:#fdf2f3;" class="nav-link" href="{{ url('my-order') }}">
+        <i class="icon-reorder"></i>
+        Đơn hàng
       </a>
       </li>
       <li><a style="color:#fdf2f3;" class="nav-link" href="{{ url('user-detail') }}">

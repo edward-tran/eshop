@@ -7,11 +7,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Admin Page</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-
+    <link href="{{ asset('frontend/css/product_detail.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/css/cart.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/css/checkout.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/css/user-detail.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet" />
     <!-- Styles -->
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="{{ asset('admin/css/styles.css')}}" rel="stylesheet" />

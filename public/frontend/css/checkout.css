@@ -72,11 +72,12 @@
     margin-left:20px;
 }
 
-#pay-button{
+#place-order-button{
     text-align:center;
     display:inline-block
 }
 
-#pay-button button{
+#place-order-button button{
     border-radius:30px;
+    width: 200px;
 }

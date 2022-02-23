@@ -22,7 +22,7 @@
                             <div class="card-body" style="border-radius: 15px; ">
                                 <h5 style="height:50px;">{{ $product->name }}</h5>
                                 <span class="float-start" style="color:red;">{{ $product->selling_price }}&#8363</span>
-                                <span class="float-end"><s>{{ $product->original_price }}&#8363</s></span>
+                                <span class="float-end" style="color:black;"><s>{{ $product->original_price }}&#8363</s></span>
                             </div>
                             </a>
                         </div>

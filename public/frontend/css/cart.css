@@ -27,7 +27,7 @@ h5{
 }
 
 #cart-price-label{
-    font-weight:normal;
+    font-weight:bold;
     font-size: 15px;
 }
 
@@ -58,7 +58,7 @@ i{
 
 #cart-quantity-label{
     margin-left:30px;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 15px;
 }
 

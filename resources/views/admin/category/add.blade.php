@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title')
+Add New Category
+@endsection
 @section('content')
     <div class="card" style="margin: 20px 20px; border-radius:20px;">
         <div class="card-header" style="border-top-left-radius:20px; border-top-right-radius: 20px;">

@@ -31,10 +31,17 @@
     <script src="{{ asset('frontend/js/bootstrap5.bundle.min.js') }}"></script>
     <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
 </head>
-<body style="background-color: #a8abc1; ">
-  @include('layouts.inc.home_nav')
-    <div class="content">
-    @yield('content')
+<body style="background-color: #a8abc1;">
+    @include('layouts.inc.home_nav')
+    @if (\Session::has('message'))
+    <div class="alert alert-success">
+        <ul>
+            <li>{!! \Session::get('message') !!}</li>
+        </ul>
+    </div>
+    @endif
+    <div class="content" style="height:100%; position:relative;">
+        @yield('content')
     </div>
     @yield('scripts')
 </body>

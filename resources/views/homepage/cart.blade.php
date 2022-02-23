@@ -10,6 +10,7 @@
         <a href="{{ url('cart') }}">Cart</a> 
     </h4>
     <div class="wrapper" id="cart-detail">
+      @if ($cartItems->count() > 0)
         <table class="table">
         @php $total = 0;@endphp
         @foreach ($cartItems as $cartItem)
@@ -76,6 +77,11 @@
           </div>
         </div>
     </div>
+    @else
+    <div style="color:red;">
+      Giỏ hàng của bạn trống. Vui lòng thêm sản phẩm vào giỏ hàng!
+    </div>
+    @endif
 @endsection
 @section('scripts')
   <script>

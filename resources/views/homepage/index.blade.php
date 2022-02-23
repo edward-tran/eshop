@@ -20,7 +20,7 @@
                                 <div class="card-body">
                                     <h5>{{ $featuredProduct->name }}</h5>
                                     <span class="float-start" style="color:red;">{{ $featuredProduct->selling_price }}&#8363</span>
-                                    <span class="float-end"><s>{{ $featuredProduct->original_price }}&#8363</s></span>
+                                    <span class="float-end" style="color:black;"><s>{{ $featuredProduct->original_price }}&#8363</s></span>
                                 </div>
                         </div>
                         </a>

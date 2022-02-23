@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Homepage\CartController;
 use App\Http\Controllers\HomePage\CheckoutController;
+use App\Http\Controllers\HomePage\CustomerController;
 use App\Http\Controllers\HomePage\HomePageController;
 
 /*
@@ -39,6 +42,10 @@ Route::get('user-detail', [HomePageController::class, 'showUserDetail']);
 Route::middleware(['auth'])->group(function(){
     Route::get('cart', [CartController::class, 'showCart']);
     Route::get('checkout', [CheckoutController::class, 'index']);
+    Route::post('place-order', [CheckoutController::class, 'placeOrder']);
+    Route::get('my-order', [CustomerController::class, 'index']);
+    Route::get('order-detail/{id}', [CustomerController::class, 'showOrder']);
+
 });
 
 
@@ -61,4 +68,10 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::post('/update-product/{id}', [ProductController::class, 'update']);
     Route::get('/delete-product/{id}', [ProductController::class, 'destroy']);
 
+    Route::get('orders', [OrderController::class, 'index']);
+    Route::get('admin/order-detail/{id}', [OrderController::class, 'showOrder']);
+    Route::post('update-order/{id}', [OrderController::class, 'updateOrder']);
+    Route::get('order-completed', [OrderController::class, 'showOrderCompleted']);
+    Route::get('users', [DashboardController::class, 'showUsers']);
+    Route::get('user/user-detail/{id}', [DashboardController::class, 'showUserDetail']);
 });

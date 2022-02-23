@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title')
+Edit Category Detail
+@endsection
 @section('content')
     @if (\Session::has('message'))
         <div class="alert alert-success">
