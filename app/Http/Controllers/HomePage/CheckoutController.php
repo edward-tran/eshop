@@ -41,6 +41,9 @@ class CheckoutController extends Controller
         $order->address = $request->input('address');
         $order->phone = $request->input('phone');
 
+        $order->payment_method = $request->input('payment_method');
+        $order->payment_id = $request->input('payment_id');
+
         $total = 0;
         $cartItem_total = Cart::where('user_id', Auth::id())->get();
         foreach ($cartItem_total as $product){
@@ -68,6 +71,32 @@ class CheckoutController extends Controller
         $cartItem = Cart::where('user_id', Auth::id())->get();
         Cart::destroy($cartItem);
 
+        if ( $request->input('payment_method') == "Thanh toán với Razorpay" ||  $request->input('payment_method') == "Thanh toán với Paypal" ){
+            return response()->json(['status'=>'Đơn hàng đã được xác nhận!']);
+        }
         return redirect('/')->with('message', "Đơn hàng đã được xác nhận!");
+    }
+
+    public function payWithRazorpay(Request $request){
+        $cartItems = Cart::where('user_id', Auth::id())->get();
+        
+        $total = 0;
+
+        foreach ($cartItems as $cartItem){
+            $total += $cartItem->product_qty * $cartItem->products->selling_price;
+        }
+
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $address = $request->input('address');
+        $phone = $request->input('phone');
+
+        return response()->json([
+            'name' => $name,
+            'email' => $email,
+            'address' => $address,
+            'phone' => $phone,
+            'total' => $total,
+        ]);
     }
 }

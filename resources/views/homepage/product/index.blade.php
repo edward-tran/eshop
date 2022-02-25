@@ -7,6 +7,8 @@
 @section('content')
     <h4 id="navbar-sub">
         <a href="/">Trang chủ</a>
+        <i class="fas fa-chevron-right fa-sm"></i>
+        <a href="{{ url('category') }}">Hãng</a> 
         <i class="fas fa-chevron-right fa-sm"></i> 
         {{ $category->name }}
     </h4>

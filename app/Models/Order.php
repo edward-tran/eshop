@@ -19,6 +19,8 @@ class Order extends Model
         'address',
         'phone',
         'total_price',
+        'payment_method',
+        'payment_id',
         'status',
         'message',
         'tracking-no',

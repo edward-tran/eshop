@@ -6,6 +6,8 @@
 @section('content')
   <h4 id="product-navbar-sub">
     <a href="/">Trang chủ </a>
+    <i class="fas fa-chevron-right fa-sm"></i>
+    <a href="{{ url('category') }}">Hãng</a>
     <i class="fas fa-chevron-right fa-sm"></i> 
     <a href="{{ url('category', $category->slug) }}">{{ $product->category->name }}</a> 
     <i class="fas fa-chevron-right fa-sm"></i>
@@ -43,11 +45,6 @@
           <button type="button" class="btn btn-success addToCartBtn">
             <i class="fas fa-cart-plus"></i>
             Thêm vào giỏ hàng
-          </button>
-        @else 
-          <button type="button" class="btn btn-success addToWishList">
-          <i class="fa fa-heart" aria-hidden="true"></i>
-            Mua vào lần tới
           </button>
         @endif
         </div>

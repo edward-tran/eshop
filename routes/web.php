@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('place-order', [CheckoutController::class, 'placeOrder']);
     Route::get('my-order', [CustomerController::class, 'index']);
     Route::get('order-detail/{id}', [CustomerController::class, 'showOrder']);
-
+    Route::post('pay-with-razorpay', [CheckoutController::class, 'payWithRazorpay']);
 });
 
 
