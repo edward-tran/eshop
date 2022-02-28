@@ -11,7 +11,7 @@
     </h4>
     <div class="wrapper" id="cart-detail">
       @if ($cartItems->count() > 0)
-        <table class="table">
+        <table class="table cartItems">
         @php $total = 0;@endphp
         @foreach ($cartItems as $cartItem)
             <tr class="product-data">
@@ -165,7 +165,7 @@
         dataType: "json",
         success: function (response) {
           alert(response.status);
-          window.location.reload();
+          $('.cartItems').load(location.href + ' .cartItems');
         }
       });
 

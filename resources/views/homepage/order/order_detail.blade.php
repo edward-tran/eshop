@@ -12,19 +12,19 @@
             <div id="checkout-form">
                 <div class="col-md-12 label-input">
                     <label class="col-md-3 custom-label" for="">Tên</label>
-                    <input class="col-md-9 custom-input" name="name" type="text" placeholder="Nhập vào tên" value="{{ $orders->name }}">
+                    <input class="col-md-9 custom-input" name="name" type="text" placeholder="Nhập vào tên" value="{{ $order->name }}">
                 </div>
                 <div class="col-md-12 label-input">
                     <label class="col-md-3 custom-label" for="">Email</label>
-                    <input class="col-md-9 custom-input" name="email" type="text" placeholder="Nhập vào email" value="{{ $orders->email }}">
+                    <input class="col-md-9 custom-input" name="email" type="text" placeholder="Nhập vào email" value="{{ $order->email }}">
                 </div>
                 <div class="col-md-12 label-input">
                     <label class="col-md-3 custom-label" for="">Địa chỉ giao hàng</label>
-                    <input class="col-md-9 custom-input" name="address" type="text" placeholder="Nhập vào địa chỉ" value="{{ $orders->address }}">
+                    <input class="col-md-9 custom-input" name="address" type="text" placeholder="Nhập vào địa chỉ" value="{{ $order->address }}">
                 </div>
                 <div class="col-md-12 label-input">
                     <label class="col-md-3 custom-label" for="">Số điện thoại</label>
-                    <input class="col-md-9 custom-input" name="phone" type="text" placeholder="Nhập vào số điện thoại" value="{{ $orders->phone }}">
+                    <input class="col-md-9 custom-input" name="phone" type="text" placeholder="Nhập vào số điện thoại" value="{{ $order->phone }}">
                 </div>
             </div>
         </div>
@@ -40,14 +40,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orders->orderItems as $orderItem)
+                        @foreach ($order->orderItems as $orderItem)
                         <tr>
                             <td>
                                 <img src="{{ asset('assets/uploads/products/'.$orderItem->products->image) }}" alt="OrderItem Image" width="30px" height="30px">
                             </td>
                             <td>{{ $orderItem->products->name }}</td>
                             <td>{{ $orderItem->product_qty }}</td>
-                            <td>{{ $orderItem->product_price }}</td>
+                            <td>{{ $orderItem->product_price }}&#8363</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -56,7 +56,13 @@
                     <div style="float: left;" class="col-md-6">
                     </div>
                     <div style="float: right; text-align:right; font-weight:bold;" class="col-md-6">
-                        Tổng cộng : {{ $orders->total_price }}
+                        Tổng cộng : {{ $order->total_price }}&#8363
+                    </div>
+                </div>
+                <div style="margin-top:30px; text-align:right;">
+                    <div style="font-weight: bold;">Phương thức thanh toán</div>
+                    <div style="color:green; font-size:20px; font-weight:bold;">
+                        <i>{{ $order->payment_method }}</i>
                     </div>
                 </div>
             </div>

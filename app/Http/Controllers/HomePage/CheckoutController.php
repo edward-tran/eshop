@@ -43,6 +43,9 @@ class CheckoutController extends Controller
 
         $order->payment_method = $request->input('payment_method');
         $order->payment_id = $request->input('payment_id');
+        if ($order->payment_method != 'COD'){
+            $order->status='1';
+        }
 
         $total = 0;
         $cartItem_total = Cart::where('user_id', Auth::id())->get();

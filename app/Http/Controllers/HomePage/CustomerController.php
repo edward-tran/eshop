@@ -15,7 +15,7 @@ class CustomerController extends Controller
     }
 
     public function showOrder($id){
-        $orders = Order::where('id', $id)->where('user_id', Auth::id())->first();
-        return view('homepage.order.order_detail', compact('orders'));
+        $order = Order::where('id', $id)->where('user_id', Auth::id())->first();
+        return view('homepage.order.order_detail', compact('order'));
     }
 }

@@ -107,8 +107,8 @@
           },
           dataType: "json",
           success: function (response) {
-            alert(response.status);
-            window.location.reload();
+            alert('Sản phẩm đã được thêm vào giỏ hàng!');
+            window.location.href="/cart";
           }
         });
     });

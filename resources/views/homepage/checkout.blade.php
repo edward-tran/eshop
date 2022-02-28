@@ -35,6 +35,8 @@
         <div id="right-content" class="col-md-6">
             <div id="checkout-cart-detail">Thông tin giỏ hàng</div>
             <hr>
+            @if ($cartItems->count()>0)
+            @php $total = 0;@endphp
             <div id="detail">
                 <table>
                     <thead>
@@ -43,7 +45,6 @@
                             <td class="col-md-4">Sản phẩm</td>
                             <td class="col-md-2">Giá</td>
                             <td class="col-md-2">Số lượng</td>
-                            <td class="col-md-2">Tong tien</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,21 +63,31 @@
                                 {{ $cartItem->product_qty }}
                             </td>
                         </tr>
+                        @php $total += $cartItem->products->selling_price * $cartItem->product_qty; $usd_total = ceil($total/23000) ; $rupee_total = ceil($total/302) @endphp
                         @endforeach
                     </tbody>
                 </table>
             </div>
+            <div style="float: right;" class="col-md-3">
+                <div style="color:red; font-weight:bold;">Tổng tiền {{ $total }}&#8363 </div>
+            </div>
             <div id="place-order-button" class="col-md-12">
-                <div style="float: left;" class="col-md-6"></div>
-                <div style="float: right" class="col-md-6">
+                <div style="margin-top:20px;">
                     <input type="hidden" name="payment_method" value="COD">
-                    <button type="submit" class="btn btn-danger">Thanh Toán | COD</button>
-                    <button type="button" class="btn btn-success razorpayBtn" style="margin-top:5px;">
-                    Thanh Toán với Razorpay
-                    </button>
-                    <div id="paypal-button-container"></div>
+                    <div>
+                        <button type="submit" class="btn btn-danger" style="width:75%;">Thanh Toán bằng tiền mặt | COD</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-success razorpayBtn" style="margin-top:5px; width:75%;">
+                            Thanh Toán với Razorpay
+                        </button>
+                    </div>
+                    <div id="paypal-button-container" style="margin-top:5px;width:75%; margin-left:60px;"></div>
                 </div>
             </div>
+            @else
+                <div style="color:red; font-weight:bold; text-align:center;">Giỏ hàng của bạn trống.</div>
+            @endif
         </div>
     </form>
  </div>
@@ -132,13 +143,12 @@
             if (name_error != '' ||  email_error != '' || address_error != '' ||  phone_error != ''){
                 return false;
             }else{
-
                 var data = {
                     'name':name,
                     'email':email,
                     'address':address,
                     'phone':phone,
-                };
+                }
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -146,35 +156,33 @@
                 });
                 $.ajax({
                     type: "POST",
-                    url: "pay-with-razorpay",
+                    url: "/pay-with-razorpay",
                     data: data,
                     success: function (response) {
-                        //alert(response.total);
                         var options = {
                             "key": "rzp_test_yUEnNRIjIsLKcp", // Enter the Key ID generated from the Dashboard
-                            "amount": 1*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                            "amount": "{{ $rupee_total }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                             "currency": "INR",
                             "name": response.name,
                             "description": "Cảm ơn bạn đã chọn dịch vụ của chúng tôi!",
                             "image": "https://example.com/your_logo",
                             //"order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                            "handler": function (responses){
-                                alert(responses.razorpay_payment_id);
-
-
+                            "handler": function (response){
                                 $.ajax({
                                     type: "POST",
-                                    url: "place-order",
-                                    data:{
-                                        'name':responses.name,
-                                        'email':responses.email,
-                                        'address':responses.address,
-                                        'phone':responses.phone,
+                                    url: "/place-order",
+                                    data: {
+                                        'name':name,
+                                        'email':email,
+                                        'address':address,
+                                        'phone':phone,
                                         'payment_method':"Thanh toán với Razorpay",
-                                        'payment_id':responses.razorpay_payment_id
+                                        'payment_id':response.razorpay_payment_id
                                     },
-                                    success: function (responsess) {
-                                        alert(responsess.status);
+                                    dataType:"json",
+                                    success: function (response) {
+                                        alert(response.status);
+                                        window.location.href="/my-order";
                                     }
                                 });
                             },
@@ -196,7 +204,7 @@
         });
     });
 </script>
-<script src="https://www.paypal.com/sdk/js?client-id=AYTu49Iof3rOlAHaiHm2EjdjbR1TlwBk3YmvXcjuh-gvKmelJZCYMosPe1tBqiTru7xc9vfenmahK7y6"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AX0umjNChwpwD4slR3GEj_0LvNECcMkfUJXs9drd9nGNteqeP4pgV5Y2seV_8jUZyRnB6vvXXVf_WIdT"></script>
 <script>
     paypal.Buttons({
         // Sets up the transaction when a payment button is clicked
@@ -204,7 +212,8 @@
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: '77.44' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
+                currency_code:"USD",
+                value: "{{ $usd_total }}" // Can reference variables or functions. Example: `value: document.getElementById('...').value`
               }
             }]
           });
@@ -217,32 +226,31 @@
                 console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                 var transaction = orderData.purchase_units[0].payments.captures[0];
                 alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                var name = $('.name').val();
+                var email = $('.email').val();
+                var address = $('.address').val();
+                var phone = $('.phone').val();
 
-                
-                var data = {
-                    'name':name,
-                    'email':email,
-                    'address':address,
-                    'phone':phone,
-                };
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+
                 $.ajax({
                     type: "POST",
-                    url: "place-order",
+                    url: "/place-order",
                     data: {
                         'name':name,
                         'email':email,
                         'address':address,
                         'phone':phone,
-                        'payment_method':'Thanh toan voi Paypal',
-                        'payment_id':transaction.id
+                        'payment_method':'Thanh toán với Paypal',
+                        'payment_id':orderData.id
                     },
                     success: function (response) {
                         alert(response.status);
+                        window.location.href="/my-order";
                     }
                 });
 

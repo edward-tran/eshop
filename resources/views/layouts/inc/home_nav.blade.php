@@ -40,7 +40,7 @@
       </li>
       <li class="nav-item">
         <a style="color:#fdf2f3;" class="nav-link" href="{{ url('my-order') }}">
-        <i class="icon-reorder"></i>
+        <i class="fa fa-folder" aria-hidden="true"></i>
         Đơn hàng
       </a>
       </li>
