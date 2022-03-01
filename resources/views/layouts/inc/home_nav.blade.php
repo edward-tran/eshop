@@ -1,8 +1,19 @@
 <nav class="navbar navbar-expand-lg " style="background-color: #94a3ba;">
   <a class="navbar-brand" href="{{ url('/') }}" style="margin-left: 30px; color:white;">Mobile World </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="input-group " id="search-div">
+    <form action="{{ url('search-product') }}" method="POST">
+      @csrf
+      <div style="display: inline-block;" >
+        <div style="float:left">
+          <input type="search" id="search-product" class="form-control" name="product" placeholder="Tìm kiếm sản phẩm" aria-label="search" aria-describedby="basic-addon1">
+        </div>
+        <div style="float:right">
+          <button  type="submit" class="input-group-text" id="basic-addon1"><i class="fa fa-search" style="height:20px; margin-top:4px;"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:30px;">
     <ul class="navbar-nav ms-auto">

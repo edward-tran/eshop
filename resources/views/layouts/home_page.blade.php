@@ -22,6 +22,7 @@
     <link href="{{ asset('frontend/css/user-detail.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/js/checkout.js') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link href="https://fonts.googleapis.com/css?family=Bentham|Playfair+Display|Raleway:400,500|Suranna|Trocchi" rel="stylesheet">
     <style>
         a{
@@ -45,6 +46,23 @@
         @yield('content')
     </div>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     @yield('scripts')
+    <script>
+        var data = [];
+        $.ajax({
+            type: "GET",
+            url: "/product-list",
+            success: function (response) {
+                //console.log(response);
+                startAutoComplete(response);
+            }
+        });
+        function startAutoComplete(data){
+            $("#search-product").autocomplete({
+            source: data
+            });
+        }
+    </script>
 </body>
 </html>

@@ -28,7 +28,6 @@ class CartController extends Controller
                     $cartItem->product_qty = $product_qty;
                     $cartItem->save();
                     return response()->json(['status'=>$product_check->name.' đã thêm vào giỏ hàng thành công! ']);
-                    
                 }
             }
         }else{

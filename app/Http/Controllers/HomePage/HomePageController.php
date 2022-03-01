@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -53,6 +54,30 @@ class HomePageController extends Controller
             }
         }else{
             return redirect('/')->with('No such category found');
+        }
+    }
+
+    public function showSearchResult(){
+        $products = Product::select('name')->where('status','0')->get();
+        $data = [];
+
+        foreach( $products as $product){
+            $data[] = $product['name'];
+        }
+        return $data;
+    }
+
+    public function searchProduct( Request $request){
+        $result = $request->product;
+        if($result != " "){
+            $product = Product::where('name', 'LIKE', '%'. $result .'%')->first();
+            if($product){
+                return redirect('category/'.$product->category->slug.'/'.$product->slug);
+            }else{
+                return redirect()->back()->with('message', 'Khong tim thay san pham nay.');
+            }
+        }else{
+            return redirect()->back();
         }
     }
 }

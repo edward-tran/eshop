@@ -9,6 +9,8 @@ use App\Http\Controllers\Homepage\CartController;
 use App\Http\Controllers\HomePage\CheckoutController;
 use App\Http\Controllers\HomePage\CustomerController;
 use App\Http\Controllers\HomePage\HomePageController;
+use App\Mail\DemoMail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,16 +30,17 @@ Route::get('/', [HomePageController::class, 'index']);
 Route::get('/category', [HomePageController::class, 'showCategory']);
 Route::get('/category/{slug}', [HomePageController::class, 'showProduct']);
 Route::get('/category/{category_slug}/{product_slug}', [HomePageController::class, 'showProductDetail']);
-
+Route::get('product-list', [HomePageController::class, 'showSearchResult']);
+Route::post('search-product', [HomePageController::class, 'searchProduct']);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('add-to-cart', [CartController::class, 'addProduct']);
 Route::post('delete-cart-item', [CartController::class, 'deleteProduct']);
 Route::post('update-cart', [CartController::class, 'updateCart']);
 Route::get('user-detail', [HomePageController::class, 'showUserDetail']);
+Route::post('add-to-cart', [CartController::class, 'addProduct']);
 
 Route::middleware(['auth'])->group(function(){
     Route::get('cart', [CartController::class, 'showCart']);

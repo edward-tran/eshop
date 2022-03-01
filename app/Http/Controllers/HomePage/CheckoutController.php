@@ -10,7 +10,8 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use GuzzleHttp\Handler\Proxy;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMailConfirm;
 class CheckoutController extends Controller
 {
     public function index(){
@@ -56,7 +57,7 @@ class CheckoutController extends Controller
         
         $order->tracking_no = Auth::user()->name.rand(1111,9999);
         $order->save();
-
+        $this->sendOrderComfirmationMail($order);
         $cartItems = Cart::where('user_id', Auth::id())->get();
         foreach ($cartItems as $cartItem){
             OrderItem::create([
@@ -70,7 +71,6 @@ class CheckoutController extends Controller
             $quantity_update->quantity = $quantity_update->quantity - $cartItem->product_qty;
             $quantity_update->update();
         }
-
         $cartItem = Cart::where('user_id', Auth::id())->get();
         Cart::destroy($cartItem);
 
@@ -78,6 +78,10 @@ class CheckoutController extends Controller
             return response()->json(['status'=>'Đơn hàng đã được xác nhận!']);
         }
         return redirect('/')->with('message', "Đơn hàng đã được xác nhận!");
+    }
+
+    public function sendOrderComfirmationMail($order){
+        Mail::to($order->email)->send(new OrderMailConfirm($order));
     }
 
     public function payWithRazorpay(Request $request){
