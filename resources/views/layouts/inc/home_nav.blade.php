@@ -55,7 +55,7 @@
         Đơn hàng
       </a>
       </li>
-      <li><a style="color:#fdf2f3;" class="nav-link" href="{{ url('user-detail') }}">
+      <li><a style="color:#fdf2f3;" class="nav-link" href="{{ url('user-detail/'.Auth::id()) }}">
       <i class="fa fa-user"  aria-hidden="true" style="margin-right: 5px;"></i>
       {{ Auth::user()->name }}</a></li>
       <li >

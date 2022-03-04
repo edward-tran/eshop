@@ -20,13 +20,21 @@ class HomePageController extends Controller
         return view('homepage.index', compact('featuredProducts', 'featuredCategories'));
     }
 
-    public function showUserDetail(){
-        $userName = Auth::user()->name;
-        $email = Auth::user()->email;
-        $address = Auth::user()->address;
-        $phone = Auth::user()->phone;
-        return view('homepage.user_detail', compact('userName', 'email', 'address', 'phone'));
+    public function showUserDetail($id){
+        $user = User::find($id);
+        return view('homepage.user_detail', compact('user'));
     }
+
+    public function updateUserDetail(Request $request, $id){
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->address = $request->input('address');
+        $user->phone = $request->input('phone');
+        $user->update();
+        return redirect('user-detail/'.$id)->with('message','Cập nhật thông tin thành công!');
+    }
+
     public function showCategory(){
         $categories = Category::where('status', '0')->get();
         return view('homepage.category', compact('categories'));

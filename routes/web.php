@@ -39,7 +39,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('delete-cart-item', [CartController::class, 'deleteProduct']);
 Route::post('update-cart', [CartController::class, 'updateCart']);
-Route::get('user-detail', [HomePageController::class, 'showUserDetail']);
+Route::get('user-detail/{id}', [HomePageController::class, 'showUserDetail']);
+Route::post('update-user-detail/{id}', [HomePageController::class, 'updateUserDetail']);
 Route::post('add-to-cart', [CartController::class, 'addProduct']);
 
 Route::middleware(['auth'])->group(function(){
